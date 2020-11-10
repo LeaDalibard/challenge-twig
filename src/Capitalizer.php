@@ -4,12 +4,20 @@
 namespace App;
 
 
-class Capitalizer  implements transform
+class Capitalizer implements transform
 {
-    public function transform($string): string
+    public function transform(string $string): string
     {
         // TODO: Implement transform() method.
-        return preg_replace('/(\w)(.)?/e', "strtoupper('$1').strtolower('$2')", $string);
+
+        return implode(" ", array_map(function ($word) {
+            $splitWord = str_split($word);
+            return implode("", array_map(function ($value, $key) {
+                return ($key % 2 === 0) ? strtoupper($value) : strtolower($value);
+            }, $splitWord, array_keys($splitWord)));
+
+        }, explode(" ", $string)));
+
     }
 }
 

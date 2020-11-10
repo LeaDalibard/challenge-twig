@@ -28,10 +28,9 @@ class MasterController extends AbstractController
     {
         if ($_POST['message']) {
             $message = $_POST['message'];
-            file_put_contents('log.info', json_encode($message, JSON_PRETTY_PRINT));
-
         } else {
             $message = 'Mymessage';
+
         }
 
         return $this->render('master/index.html.twig', [
