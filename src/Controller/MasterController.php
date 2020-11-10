@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Master;
+use App\Weirdcase;
+use App\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,14 +30,16 @@ class MasterController extends AbstractController
     public function message(): Response
     {
         if ($_POST['message']) {
-            $message = $_POST['message'];
+            $messagepost = $_POST['message'];
+            $message=new Master($messagepost);
+            $message->log();
+            $finalmessage=$message->weirdcase();
         } else {
-            $message = 'Mymessage';
-
+            $finalmessage = 'Mymessage';
         }
 
         return $this->render('master/index.html.twig', [
-            'message' => $message,
+            'message' => $finalmessage,
         ]);
     }
 

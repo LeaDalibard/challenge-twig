@@ -4,7 +4,7 @@
 namespace App;
 
 
-class Capitalizer implements transform
+class Weirdcase implements transform
 {
     public function transform(string $string): string
     {
