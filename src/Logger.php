@@ -6,9 +6,9 @@ namespace App;
 
 class Logger
 {
-    public function log($message)
+    public function log(string $message)
     {
         file_put_contents('log.info', $message, FILE_APPEND );
-        //file in in public directory
+        //file in public directory
     }
 }

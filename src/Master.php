@@ -8,26 +8,27 @@ class Master
 {
     private string $message;
     private $logger;
-    private $weirdcase;
 
-    public function __construct(string $message)
+    public function __construct(string $message, transform $transform)
     {
-        $this->message = $message;
+        $this->message = $transform->transform($message);
         $logger = new Logger();
         $this->logger = $logger;
-        $weirdcase = new Weirdcase();
-        $this->weirdcase = $weirdcase;
-    }
-
-    public function log()
-    {
         $this->logger->log($this->message);
     }
 
-    public function weirdcase()
+    /**
+     * @return string
+     */
+    public function getMessage(): string
     {
-        $newmessage = $this->weirdcase->transform($this->message);
-        echo $newmessage;
+        return $this->message;
     }
+
+    //public function log()
+    //    {
+    //        $this->logger->log($this->message);
+    //    }
+
 
 }
